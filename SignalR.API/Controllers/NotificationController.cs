@@ -23,6 +23,7 @@ namespace SignalR.API.Controllers
         [HttpGet("{TeamCount}")]
         public async Task<IActionResult> SetTeamCount(int TeamCount)
         {
+            MyHub.TeamCount = TeamCount;
             //Notify Subscribe adı, diğeri ise ekrana gösterceğimiz metin
             await _hubContext.Clients.All.SendAsync("Notify", $"Takım maksimum {TeamCount} kişi olmalıdır");
             return Ok();

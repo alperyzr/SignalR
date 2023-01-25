@@ -14,10 +14,21 @@
     <div class="col-md-8 offset-2">
         <div class="row">
             <div class="col-12">
-                <input type="text" class="form-control" id="txtName" />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-ınput" type="radio" name="TeamGroup" value="Team A"/>
+                    <label class="form-check-label">A Takımı</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-ınput" type="radio" name="TeamGroup" value="Team B" />
+                    <label class="form-check-label">B Takımı</label>
+                </div>
+            </div>           
+            <div class="col-12 mt-3">
+                <input type="text" class="form-control" id="txtName" placeholder="İsim Ekle" />
             </div>
             <div class="col-12 mt-3">
-                <button type="submit" class="btn btn-primary" id="btnNameSave">İsim kaydet</button>
+                <button type="submit" class="btn btn-primary" id="btnNameSave">İsim Kaydet</button>
+                <button type="submit" class="btn btn-warning ml-3" id="btnNameTeam">Grup Kaydet</button>
             </div>
             <div class="col-12 mt-3">
                 <div class="alert alert-info">
@@ -42,7 +53,23 @@
                  <div id="Notify"></div>
             </div>
             <div class="col-12 mt-3">
+                Static Listte Tutulan İsimler
                 <ul class="list-group" id="namesList"></ul>
+            </div>
+            <div class="col-12 öt-3">
+                Db de Tutulan İsimler
+                <ul class="list-group" id="GetAllListAsync"></ul>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="list-group" id="ATeamList"></ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-group" id="BTeamList"></ul>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

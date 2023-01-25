@@ -18,6 +18,10 @@ $(document).ready(() => {
     connection.start().then((e) => {
         $("#conStatus").text(connection.q);
         $("#loadingIcon").hide();
+       
+        //Sayfa ilk açılırken static listede veri varsa çağırmak için kullanılır
+        connection.invoke("GetNames");
+        connection.invoke("GetAllNamesAsync");
     }).catch((err) => {
         console.log(err);
     });
@@ -25,13 +29,17 @@ $(document).ready(() => {
     $("#conStatus").text(connection.q);
 
     //#endregion
-   
+
     //#region Bağlantı Sorunlaru
     //Girişten itibaren bağlantı yoksa belirli aralıklarla bağlanmaya çalışması için
     function Start() {
         connection.start().then((e) => {
             $("#conStatus").text(connection.q);
             $("#loadingIcon").hide();
+            
+            //Sayfa ilk açılırken static listede veri varsa çağırmak için kullanılır
+            connection.invoke("GetNames");
+            connection.invoke("GetAllNamesAsync");
         }).catch((err) => {
             console.log(err);
             //Başlangıçta bağlantıda bir sorun varsa 2sn sonra tekrar dener
@@ -53,37 +61,92 @@ $(document).ready(() => {
     });
     connection.onclose(() => {
         $("#loadingIcon").hide();
-        $("#conStatus").text(connection.q); 
+        $("#conStatus").text(connection.q);
         // 4 denemesinde Bağlantı tamamen kapandıktan sonra tekrar başlatılması sağlanabilir
         Start();
     });
 
     //#endregion
 
+    //#region Buton Clickler
     $("#btnNameSave").click(function () {
 
         //Server üzerindeki methodları çağırmak için kullanılır
         //txtName i parametre olarak gönderiyoruz
         connection.invoke("SendName", $("#txtName").val()).then(() => {
-            
-        }).catch((err) => {           
+
+        }).catch((err) => {
             console.log(err);
         });
     });
+
+    $("#btnNameTeam").click(() => {
+        let name = $("#txtName").val();
+        let teamId = $("input[type=radio]:checked").val();
+
+        connection.invoke("SendNameByGroup", name, teamId);
+    });
+
+    $("input[type=radio]").change(() => {
+        let value = $(`input[type=radio]:checked`).val();
+        if (value == "Team A") {
+            //İlgili Takıma Ekler
+            connection.invoke("AddToGroup", value);
+            connection.invoke("RemoveToGroup", "Team B");
+        }
+        else {
+            connection.invoke("AddToGroup", value);
+            connection.invoke("RemoveToGroup", "Team A");
+        }
+    });
+    //#endregion
 
     //#region Methodlara Subscribe Olma
 
     //Server tarafındaki methodlara subscribe olabilmek için kullanılır
     //Aynı zamanda İsim Ekle butonuna tıklanıldıktan sonra inputtaki text te girilen name i methoda gönderir 
-    connection.on("ReceiveName", (name) => {      
-        $("#namesList").append(`<li class="list-group-item"> ${name}</li>`); 
+    connection.on("ReceiveName", (name) => {
+        $("#namesList").append(`<li class="list-group-item"> ${name}</li>`);
     });
 
     connection.on("ReceiceClientCount", (clientCount) => {
         $("#ClientCount").text(clientCount);
     });
-    connection.on("Notify", (countText) => {        
+    connection.on("Notify", (countText) => {
         $("#Notify").html(`<div class="alert alert-success">${countText}</div>`);
+    });
+    connection.on("Error", (errorText) => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorText,
+        })
+    });
+
+    //Bağlantı ilk açıldığında static NameListesinde dava varsa db den okuma mantığı gibi okuyup ekrana basıyor
+    connection.on("ReceiveNames", (names) => {
+        $("#namesList").empty();
+        names.forEach((item, index) => {
+            $("#namesList").append(`<li class="list-group-item"> ${item}</li>`);
+        });
+    });
+
+    connection.on("ReceiveMessageByGroup", (name, teamName) => {
+        if (teamName == "Team A") {
+            $("#ATeamList").append(`<li class="list-group-item"> ${name}</li>`);
+        }
+        if (teamName == "Team B") {
+            $("#BTeamList").append(`<li class="list-group-item"> ${name}</li>`);
+        }
+    });
+    connection.on("ReceiveAllNamesAsync", (result) => {
+        debugger;
+        if (result != null) {
+            result.forEach((item, index) => {
+                $("#GetAllListAsync").append(`<li class="list-group-item"> ${item}</li>`);
+            });
+            
+        }
     });
     //#endregion
 });
