@@ -1,27 +1,32 @@
 ﻿//$(document).ready(function(){---}) ile aynı kullanım
 $(document).ready(() => {
-    debugger;
+
+    //#region Bağlantı Kısmı
+
     //Hub bağlantıı için kullanılır (API url üzerindeki hub methoduna gönderilir)
     //configureLogging(signalR.LogLevel.Debug) console ekranına logları yazmak için kullanılır
     //withUrl belirtilen URl e istek atması için kullanılır
     //build bağlantıyı inşa etmek için kullanılır
     //withAutomaticReconnect() bağlantı kesilirse belirli periotlarlarla tekrar bağlanmaya çalışmasını sağlar
     var connection = new signalR.HubConnectionBuilder().configureLogging(signalR.LogLevel.Debug).withAutomaticReconnect().withUrl("https://localhost:7088/MyHub").build();
-   
+
     //BAĞLANTI DURUMUNU EKRANA YAZDIRMA
     $("#conStatus").text(connection.q);
     /* $("#conStatus").text(connection.q);*/
 
     //Bağlantı start verilir. Then methodu success, catch methodu ise fail durumunda karşılayacağımız method olacak
-    connection.start().then((e) => {       
+    connection.start().then((e) => {
         $("#conStatus").text(connection.q);
         $("#loadingIcon").hide();
-    }).catch((err) => {       
+    }).catch((err) => {
         console.log(err);
     });
 
     $("#conStatus").text(connection.q);
 
+    //#endregion
+   
+    //#region Bağlantı Sorunlaru
     //Girişten itibaren bağlantı yoksa belirli aralıklarla bağlanmaya çalışması için
     function Start() {
         connection.start().then((e) => {
@@ -53,6 +58,8 @@ $(document).ready(() => {
         Start();
     });
 
+    //#endregion
+
     $("#btnNameSave").click(function () {
 
         //Server üzerindeki methodları çağırmak için kullanılır
@@ -64,9 +71,19 @@ $(document).ready(() => {
         });
     });
 
+    //#region Methodlara Subscribe Olma
+
     //Server tarafındaki methodlara subscribe olabilmek için kullanılır
     //Aynı zamanda İsim Ekle butonuna tıklanıldıktan sonra inputtaki text te girilen name i methoda gönderir 
     connection.on("ReceiveName", (name) => {      
         $("#namesList").append(`<li class="list-group-item"> ${name}</li>`); 
     });
+
+    connection.on("ReceiceClientCount", (clientCount) => {
+        $("#ClientCount").text(clientCount);
+    });
+    connection.on("Notify", (countText) => {        
+        $("#Notify").html(`<div class="alert alert-success">${countText}</div>`);
+    });
+    //#endregion
 });

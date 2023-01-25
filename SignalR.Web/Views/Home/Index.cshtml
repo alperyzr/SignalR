@@ -22,14 +22,24 @@
             <div class="col-12 mt-3">
                 <div class="alert alert-info">
                     <div style="float:left;">
-                        Bağlantı Durumu: <strong id="conStatus"></strong>
+                        <div class="row">
+                            <div class="col-12">
+                                 Bağlantı Durumu: <strong id="conStatus"></strong>
+                            </div>
+                            <div class="col-12">
+                                Client Sayısı: <strong id="ClientCount"></strong>
+                            </div>
+                        </div>                       
                     </div>
                     <div style="float:right;">
                         <div id="loadingIcon" class="spinner-border text-primary" role="status">                           
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                </div>
+                </div>              
+            </div>
+            <div class="col-12 mt-3">
+                 <div id="Notify"></div>
             </div>
             <div class="col-12 mt-3">
                 <ul class="list-group" id="namesList"></ul>
