@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Scripts{
+    <script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>    
+    <script src="~/js/home/product.js"></script>
+}
+
+<!--#region ProductAlanı-->
+<div class="row mt-3">
+    <div class="col-md-8 offset-2">
+        <div class="row">
+            <div class="col-12">
+                <button id="btnProductHubCoonection" class="btn btn-danger">Product Hub Bağlantısı Aç</button>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="alert alert-info">
+                    <div style="float:left;">
+                        <div class="row">
+                            <div class="col-12">
+                                ProductHub Bağlantı Durumu: <strong id="conProductHubStatus"></strong>
+                            </div>
+                            <div class="col-12">
+                                ProductHub Client Sayısı: <strong id="ClientProduthubCount"></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float:right;">
+                        <div id="loadingIconProductHub" class="spinner-border text-primary" role="status">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-danger" id="btnProduct">Ürün Gönder</button>
+            </div>
+            <div class="col-12 mt-3">
+                <pre id="getProduct"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<!--#endregion-->

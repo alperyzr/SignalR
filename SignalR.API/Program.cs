@@ -63,6 +63,7 @@ app.MapControllers();
 
 //http://localhost:4400/MyHub clientlar, api url i üzerinden hub a ulaşabilir
 app.MapHub<MyHub>("/MyHub");
+app.MapHub<ProductHub>("/ProductHub");
 
 
 app.Run();

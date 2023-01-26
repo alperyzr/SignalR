@@ -8,69 +8,88 @@
         //Ardından sadece Home/Index sayfasında kullanacağımız için aşağıdaki gibi linklerini veriyoruz
     *@
     <script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
-    <script src="~/js/home/index.js"></script>
+    <script src="~/js/home/index.js"></script>   
 }
+
+<!-- #region Test -->
 <div class="row">
     <div class="col-md-8 offset-2">
         <div class="row">
             <div class="col-12">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-ınput" type="radio" name="TeamGroup" value="Team A"/>
+                    <input class="form-check-ınput" type="radio" name="TeamGroup" value="Team A" />
                     <label class="form-check-label">A Takımı</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-ınput" type="radio" name="TeamGroup" value="Team B" />
                     <label class="form-check-label">B Takımı</label>
                 </div>
-            </div>           
+            </div>
             <div class="col-12 mt-3">
                 <input type="text" class="form-control" id="txtName" placeholder="İsim Ekle" />
             </div>
             <div class="col-12 mt-3">
-                <button type="submit" class="btn btn-primary" id="btnNameSave">İsim Kaydet</button>
-                <button type="submit" class="btn btn-warning ml-3" id="btnNameTeam">Grup Kaydet</button>
+                <button type="submit" class="btn btn-primary" id="btnNameSave">Statik İsim Kaydet</button>
+                <button type="submit" class="btn btn-warning ml-3" id="btnNameTeam">Takıma İsim Kaydet</button>
             </div>
             <div class="col-12 mt-3">
                 <div class="alert alert-info">
                     <div style="float:left;">
                         <div class="row">
                             <div class="col-12">
-                                 Bağlantı Durumu: <strong id="conStatus"></strong>
+                                Bağlantı Durumu: <strong id="conStatus"></strong>
                             </div>
                             <div class="col-12">
                                 Client Sayısı: <strong id="ClientCount"></strong>
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                     <div style="float:right;">
-                        <div id="loadingIcon" class="spinner-border text-primary" role="status">                           
+                        <div id="loadingIcon" class="spinner-border text-primary" role="status">
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                </div>              
+                </div>
             </div>
-            <div class="col-12 mt-3">
-                 <div id="Notify"></div>
+            <div class="col-12">
+                <div id="Notify" class="mt-3"></div>
             </div>
             <div class="col-12 mt-3">
                 Static Listte Tutulan İsimler
                 <ul class="list-group" id="namesList"></ul>
             </div>
-            <div class="col-12 öt-3">
+            <div class="col-12 mt-3">
                 Db de Tutulan İsimler
-                <ul class="list-group" id="GetAllListAsync"></ul>
+                <div class="row">
+                    <div class="col-6">
+                        A Takımı
+                        <ul class="list-group" id="GetAllListTeamAAsync"></ul>
+                    </div>
+                    <div class="col-6">
+                        B Takımı
+                        <ul class="list-group" id="GetAllListTeamBAsync"></ul>
+                    </div>
+                </div>
             </div>
             <div class="col-12 mt-3">
                 <div class="row">
+                    <div class="col-12">
+                        Sadece Kedi Takım Üyelerini Gören Clientlar
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
+                        A Takımı
                         <ul class="list-group" id="ATeamList"></ul>
                     </div>
                     <div class="col-6">
+                        B Takımı
                         <ul class="list-group" id="BTeamList"></ul>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
-</div>        
+</div>
+<!-- #endregion -->
