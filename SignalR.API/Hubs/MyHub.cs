@@ -100,6 +100,7 @@ namespace SignalR.API.Hubs
                 var totalCounts = _context.Users.Count();
                 if (TeamCount > totalCounts)
                 {
+                    //var team = await _context.Teams.Where(x => x.Name.Equals(TeamName)).FirstOrDefaultAsync();
                     var team = await _context.Teams.Where(x => x.Name.Equals(TeamName)).FirstOrDefaultAsync();
                     if (team != null)
                     {

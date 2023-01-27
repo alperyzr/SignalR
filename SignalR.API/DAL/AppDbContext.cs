@@ -13,6 +13,7 @@ namespace SignalR.API.DAL
 
         public DbSet<Team> Teams { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Covid> Covids { get; set; }
 
     }
 }

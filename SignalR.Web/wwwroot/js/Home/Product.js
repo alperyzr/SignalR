@@ -22,11 +22,17 @@
         
     });
 
-    $("#btnProduct").click(() => {
-        debugger;
+    $("#btnProduct").click(() => {      
         if (connectionQ == "Connected") {
             let product = { "Id": 1, "Name": "Kalem 1", "Price": 100, "Stock": 200 };
             connection.invoke("SendProductName", product);
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Lütfen Önce Bağlantıyı Açınız',
+            });
         }
        
     });

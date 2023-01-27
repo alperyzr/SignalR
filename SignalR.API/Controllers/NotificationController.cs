@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace SignalR.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class NotificationController : ControllerBase
     {

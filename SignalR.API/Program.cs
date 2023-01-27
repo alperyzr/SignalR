@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using SignalR.API.DAL;
 using SignalR.API.Hubs;
+using SignalR.API.Services;
+using SignalR.API.Services.Interfaces;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +34,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<ICovidService, CovidService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -64,6 +67,7 @@ app.MapControllers();
 //http://localhost:4400/MyHub clientlar, api url i üzerinden hub a ulaşabilir
 app.MapHub<MyHub>("/MyHub");
 app.MapHub<ProductHub>("/ProductHub");
+app.MapHub<CovidHub>("/CovidHub");
 
 
 app.Run();

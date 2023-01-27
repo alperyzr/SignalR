@@ -196,7 +196,7 @@ $(document).ready(() => {
                     }
                     else {
                         $.ajax({
-                            url: "https://localhost:7088/api/notification/" + login,
+                            url: "https://localhost:7088/api/notification/SetTeamCount/" + login,
                             type: "GET",
                             success: function (data, textStatus, jqXHR) {
                                 Swal.fire({

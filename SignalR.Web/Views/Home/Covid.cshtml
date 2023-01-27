@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Covid Grafiği";
+}
+@section Scripts{
+    <script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/js/home/covid.js"></script>
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="row">
+            <div class="col-12">
+                <div id="curve_chart" style="width: 900px; height: 500px"></div>
+            </div>
+        </div>
+    </div>
+</div>
