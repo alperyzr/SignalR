@@ -1,16 +1,3 @@
-//{
-//  "compilerOptions": {
-//    "noImplicitAny": false,
-//    "noEmitOnError": true,
-//    "removeComments": false,
-//    "sourceMap": true,
-//    "target": "es5"
-//  },
-//  "exclude": [
-//    "node_modules",
-//    "wwwroot"
-//  ]
-//}
 {
   "compileOnSave": true,
   "compilerOptions": {
@@ -19,7 +6,7 @@
     "removeComments": false,
     "sourceMap": true,
     "target": "es5",
-    "outDir": "wwwroot/js",
+    "outDir": "wwwroot/js/TsConvertToJs",
     "rootDir": "TypeScript"
   },
   "include": [
